@@ -1,5 +1,7 @@
 # instrunment_app
 
+FEE 計器表示用アプリです。
+
 A new Flutter project.
 
 ## Getting Started
