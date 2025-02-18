@@ -102,6 +102,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           //　MarkerLayerに追加したピンを指定する
           MarkerLayer(markers: addMarkers),
+          // 線を表示するレイヤー
+          PolylineLayer(
+            polylines: [
+              Polyline(
+                points: [
+                  const LatLng(35.1, 136.85),
+                  const LatLng(35.2, 136.80),
+                  const LatLng(35.3, 136.89),
+                  const LatLng(35.4, 136.82),
+                ],
+                strokeWidth: 16.0,
+                color: Colors.black,
+              ),
+            ],
+          ),
         ],
       ),
     );
