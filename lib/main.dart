@@ -50,9 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: FlutterMap(
         options: const MapOptions(
-          // 名古屋駅の緯度経度です。
-          initialCenter: LatLng(35.170915, 136.881537),
+          // 初期ズーム設定
           initialZoom: 10.0,
+          // 拡大設定
+          maxZoom: 12.0,
+          // 縮小設定
+          minZoom: 8.0,
+          // 初期回転角度。以下の場合、180度回転して表示される
+          initialRotation: 180.0,
         ),
         children: [
           TileLayer(
