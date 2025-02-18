@@ -37,23 +37,45 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Marker> addMarkers = [];
 
   // ピンを追加する関数
+
   void _addMarker(LatLng latlng) {
-    // setStateを行うことで、マップを更新している
     setState(() {
       addMarkers.add(
         Marker(
           width: 30.0,
           height: 30.0,
           point: latlng,
-          child: const Icon(
-            Icons.location_on,
-            color: Colors.blue,
-            size: 50,
+          // GestureDetectorで、タップ時の処理を追加
+          child: GestureDetector(
+            onTap: () {
+              // アラート表示処理
+              _showAlert(latlng);
+            },
+            child: const Icon(
+              Icons.location_on,
+              color: Colors.blue,
+              size: 50,
+            ),
           ),
-          rotate: true,
         ),
       );
     });
+  }
+
+  void _showAlert(LatLng latlng) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('ピンの位置'),
+        content: Text('緯度: ${latlng.latitude}, 経度: ${latlng.longitude}'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('閉じる'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
