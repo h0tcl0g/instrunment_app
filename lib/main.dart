@@ -63,6 +63,25 @@ class _MyHomePageState extends State<MyHomePage> {
           TileLayer(
             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           ),
+          const MarkerLayer(
+            markers: [
+              Marker(
+                width: 30.0,
+                height: 30.0,
+                // ピンの位置を設定
+                point: LatLng(35.170915, 136.881537),
+                child: Icon(
+                  Icons.location_on,
+                  color: Colors.red,
+                  // ここでピンのサイズを調整
+                  size: 50,
+                ),
+                // マップを回転させた時にピンも回転するのが rotate: false,
+                // マップを回転させた時にピンは常に同じ向きなのが rotate: true,
+                rotate: true,
+              ),
+            ],
+          ),
         ],
       ),
     );
