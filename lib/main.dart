@@ -33,11 +33,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  // マーカー用のList
+  List<Marker> addMarkers = [];
 
-  void _incrementCounter() {
+  // ピンを追加する関数
+  void _addMarker(LatLng latlng) {
+    // setStateを行うことで、マップを更新している
     setState(() {
-      _counter++;
+      addMarkers.add(
+        Marker(
+          width: 30.0,
+          height: 30.0,
+          point: latlng,
+          child: const Icon(
+            Icons.location_on,
+            color: Colors.blue,
+            size: 50,
+          ),
+          rotate: true,
+        ),
+      );
     });
   }
 
@@ -49,39 +64,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: FlutterMap(
-        options: const MapOptions(
-          // 初期ズーム設定
+        options: MapOptions(
+          initialCenter: const LatLng(35.170915, 136.881537),
           initialZoom: 10.0,
-          // 拡大設定
-          maxZoom: 12.0,
-          // 縮小設定
-          minZoom: 8.0,
-          // 初期回転角度。以下の場合、180度回転して表示される
-          initialRotation: 180.0,
+
+          // マップをタップした際の処理
+          // pointはタップした位置がLatLng型で受け取れるので、引数にpointを渡す
+          onTap: (tapPosition, point) {
+            _addMarker(point);
+          },
         ),
         children: [
           TileLayer(
             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           ),
-          const MarkerLayer(
-            markers: [
-              Marker(
-                width: 30.0,
-                height: 30.0,
-                // ピンの位置を設定
-                point: LatLng(35.170915, 136.881537),
-                child: Icon(
-                  Icons.location_on,
-                  color: Colors.red,
-                  // ここでピンのサイズを調整
-                  size: 50,
-                ),
-                // マップを回転させた時にピンも回転するのが rotate: false,
-                // マップを回転させた時にピンは常に同じ向きなのが rotate: true,
-                rotate: true,
-              ),
-            ],
-          ),
+          //　MarkerLayerに追加したピンを指定する
+          MarkerLayer(markers: addMarkers),
         ],
       ),
     );
