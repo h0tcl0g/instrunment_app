@@ -35,9 +35,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   // マーカー用のList
   List<Marker> addMarkers = [];
+  // MapControllerのインスタンス作成
+  final MapController mapController = MapController();
 
   // ピンを追加する関数
-
   void _addMarker(LatLng latlng) {
     setState(() {
       addMarkers.add(
@@ -45,11 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
           width: 30.0,
           height: 30.0,
           point: latlng,
-          // GestureDetectorで、タップ時の処理を追加
           child: GestureDetector(
             onTap: () {
-              // アラート表示処理
-              _showAlert(latlng);
+              // mapControllerを用いて処理を実行する
+              // mapController.camera.zoomは、現在のズーム倍率を取得する
+              mapController.move(latlng, mapController.camera.zoom);
             },
             child: const Icon(
               Icons.location_on,
@@ -86,6 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: FlutterMap(
+        // mapControllerをFlutterMapに指定
+        mapController: mapController,
         options: MapOptions(
           initialCenter: const LatLng(35.170915, 136.881537),
           initialZoom: 10.0,
