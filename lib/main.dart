@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:flutter_map_animations/flutter_map_animations.dart';
+import 'component/flutter_map/packages.dart';
 
 void main() {
   runApp(const MyApp());
