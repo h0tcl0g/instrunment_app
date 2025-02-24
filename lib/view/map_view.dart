@@ -27,13 +27,7 @@ class MyHomePage extends HookConsumerWidget {
           // マップをタップした際の処理
           // pointはタップした位置がLatLng型で受け取れるので、引数にpointを渡す
           onTap: (tapPosition, point) {
-            // markersリストを毎回作り直さないと状態が更新されない
-            // addMarkerでmarkerを追加
-            ref.read(markerProvider.notifier).addMarker(point);
-            // marker追加後のmarkersリストを取得
-            final mk = ref.read(markerProvider);
-            // markersリストを強制的に上書き
-            ref.read(markerProvider.notifier).state = [...mk];
+            ref.read(markerProvider.notifier).addMarker(point, context);
           },
         ),
         children: [

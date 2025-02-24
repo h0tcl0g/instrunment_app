@@ -8,19 +8,41 @@ final markerProvider = StateNotifierProvider<MarkerNotifier, List<Marker>>(
 class MarkerNotifier extends StateNotifier<List<Marker>> {
   MarkerNotifier() : super([]);
 
-  void addMarker(LatLng latlng) {
-    state.add(
+  void addMarker(LatLng latlng, BuildContext context) {
+    // markersリストを毎回作り直さないと状態が更新されない
+    state = [
+      ...state,
       Marker(
         width: 30.0,
         height: 30.0,
         point: latlng,
         child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onLongPress: () {
+            _showAlert(latlng, context);
+          },
           child: const Icon(
             Icons.location_on,
             color: Colors.blue,
             size: 50,
           ),
         ),
+      ),
+    ];
+  }
+
+  void _showAlert(LatLng latlng, BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('ピンの位置'),
+        content: Text('緯度: ${latlng.latitude}, 経度: ${latlng.longitude}'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('閉じる'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     );
   }
