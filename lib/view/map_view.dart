@@ -18,6 +18,7 @@ class MyHomePage extends HookConsumerWidget {
         title: Text(this.title),
       ),
       body: FlutterMap(
+        mapController: mapController,
         // _animatedMapController.mapControllerを指定する。
         // mapController: _animatedMapController.mapController,
         options: MapOptions(

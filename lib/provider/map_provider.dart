@@ -5,6 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final markerProvider = StateNotifierProvider<MarkerNotifier, List<Marker>>(
     (ref) => MarkerNotifier());
 
+// MapControllerのインスタンス作成
+final MapController mapController = MapController();
+
 class MarkerNotifier extends StateNotifier<List<Marker>> {
   MarkerNotifier() : super([]);
 
@@ -18,6 +21,9 @@ class MarkerNotifier extends StateNotifier<List<Marker>> {
         point: latlng,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
+          onTap: () {
+            mapController.move(latlng, mapController.camera.zoom);
+          },
           onLongPress: () {
             _showAlert(latlng, context);
           },
