@@ -13,10 +13,7 @@ class MyHomePage extends HookConsumerWidget {
     final markers = ref.watch(markerProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(this.title),
-      ),
+      backgroundColor: Colors.transparent,
       body: FlutterMap(
         mapController: mapController,
         // _animatedMapController.mapControllerを指定する。
