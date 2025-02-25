@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instrunment_app/component/flutter_map/packages.dart';
 import 'package:instrunment_app/provider/map_provider.dart';
+import 'package:instrunment_app/constant/static_marker.dart';
 
 class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key, required this.title});
@@ -33,6 +34,7 @@ class MyHomePage extends HookConsumerWidget {
             urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           ),
           //　MarkerLayerに追加したピンを指定する
+          MarkerLayer(markers: createInitialMarkers(context)),
           MarkerLayer(markers: markers),
           // 線を表示するレイヤー
           PolylineLayer(

@@ -17,7 +17,7 @@ class MarkerNotifier extends StateNotifier<List<Marker>> {
       ...state,
       Marker(
         width: 30.0,
-        height: 30.0,
+        height: 50.0,
         point: latlng,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
