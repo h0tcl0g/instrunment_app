@@ -4,8 +4,8 @@ import 'package:instrunment_app/component/flutter_map/packages.dart';
 import 'package:instrunment_app/provider/map_provider.dart';
 import 'package:instrunment_app/constant/static_marker.dart';
 
-class MyHomePage extends HookConsumerWidget {
-  const MyHomePage({super.key, required this.title});
+class MapView extends HookConsumerWidget {
+  const MapView({super.key, required this.title});
 
   final String title;
 
